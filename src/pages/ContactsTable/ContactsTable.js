@@ -10,6 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import { Typography } from "@material-ui/core";
+import { CopyToClipboard } from "../../components/CopyToClipboard";
 
 export const ContactsTable = ({ data }) => {
   return (
@@ -41,8 +42,12 @@ export const ContactsTable = ({ data }) => {
                 </Typography>
                 <Typography>{contact.dob.age} years</Typography>
               </TableCell>
-              <TableCell>{contact.email}</TableCell>
-              <TableCell>{contact.phone}</TableCell>
+              <TableCell>
+                <CopyToClipboard text={contact.email} />
+              </TableCell>
+              <TableCell>
+                <CopyToClipboard text={contact.phone} />
+              </TableCell>
               <TableCell>
                 <strong>/{contact.location.country}/</strong>
                 <div>

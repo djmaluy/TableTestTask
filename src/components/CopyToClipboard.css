@@ -1,0 +1,13 @@
+.copyIcon {
+  margin-right: 5px;
+}
+.copyText {
+  display: flex;
+  cursor: pointer;
+}
+.textInner {
+  text-transform: lowercase;
+  font-size: 15px;
+  font-weight: normal;
+  color: rgb(126, 124, 241);
+}
