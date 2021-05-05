@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 import { useCopyToClipboard } from "react-use";
 import Tooltip from "@material-ui/core/Tooltip";

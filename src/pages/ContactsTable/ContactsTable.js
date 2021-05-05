@@ -11,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import { Typography } from "@material-ui/core";
 import { CopyToClipboard } from "../../components/CopyToClipboard";
+import { NATIONALITY_HUMAN_NAME } from "../../constants/nationality";
 
 export const ContactsTable = ({ data }) => {
   return (
@@ -51,11 +52,12 @@ export const ContactsTable = ({ data }) => {
               <TableCell>
                 <strong>/{contact.location.country}/</strong>
                 <div>
-                  {contact.location.postcode} {contact.location.street.name}{" "}
-                  {contact.location.city}
+                  {contact.location.postcode} {contact.location.city}{" "}
+                  {contact.location.street.name}{" "}
+                  {contact.location.street.number}
                 </div>
               </TableCell>
-              <TableCell>{contact.nat}</TableCell>
+              <TableCell>{NATIONALITY_HUMAN_NAME[contact.nat]}</TableCell>
             </TableRow>
           ))}
         </TableBody>
