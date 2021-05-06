@@ -44,7 +44,9 @@ export const Contacts = () => {
     }
     return value === nationality;
   };
-
+  const clearFilters = () => {
+    setFilters(filtersDefaultValue);
+  };
   const filteredContacts = contacts.data
     .filter((c) => filterByFullname(c.name, filters.fullname))
     .filter((c) => filterByGender(c.gender, filters.gender))
@@ -62,7 +64,11 @@ export const Contacts = () => {
         </div>
       </Grid>
       <Grid item xs={12} className="filters">
-        <ContactsFilters filters={filters} updateFilter={updateFilter} />
+        <ContactsFilters
+          clearFilters={clearFilters}
+          filters={filters}
+          updateFilter={updateFilter}
+        />
       </Grid>
       {(() => {
         if (contacts.isLoading) {
