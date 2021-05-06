@@ -12,10 +12,12 @@ import { ContactsFilters } from "./ContactsFilters";
 
 const filtersDefaultValue = {
   fullname: "",
-  gender: "All",
+  gender: "all",
+  nationality: "all",
 };
 export const Contacts = () => {
   const contacts = useContacts();
+  console.log(contacts.data);
   const [viewMode, setViewMode] = useViewMode();
   const [filters, setFilters] = useState(filtersDefaultValue);
 
@@ -31,15 +33,22 @@ export const Contacts = () => {
     last?.toLocaleLowerCase().includes(fullname.toLocaleLowerCase());
 
   const filterByGender = (value, gender) => {
-    if (gender === "All") {
+    if (gender === "all") {
       return true;
     }
     return value === gender;
   };
+  const filterByNationality = (value, nationality) => {
+    if (nationality === "all") {
+      return true;
+    }
+    return value === nationality;
+  };
 
   const filteredContacts = contacts.data
     .filter((c) => filterByFullname(c.name, filters.fullname))
-    .filter((c) => filterByGender(c.gender, filters.gender));
+    .filter((c) => filterByGender(c.gender, filters.gender))
+    .filter((c) => filterByNationality(c.nat, filters.nationality));
 
   return (
     <Container>
