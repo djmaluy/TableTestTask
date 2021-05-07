@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Container } from "@material-ui/core";
 import { useContacts } from "./useContacts";
 import { Typography } from "@material-ui/core";
@@ -17,16 +17,20 @@ const filtersDefaultValue = {
 };
 export const Contacts = () => {
   const contacts = useContacts();
-  console.log(contacts.data);
+
   const [viewMode, setViewMode] = useViewMode();
   const [filters, setFilters] = useState(filtersDefaultValue);
 
-  const updateFilter = (name, value) => {
+  const updateFilter = useCallback((name, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,
     }));
-  };
+  }, []);
+
+  const clearFilters = useCallback(() => {
+    setFilters(filtersDefaultValue);
+  }, []);
 
   const filterByFullname = ({ first, last }, fullname) =>
     first?.toLocaleLowerCase().includes(fullname.toLocaleLowerCase()) ||
@@ -44,9 +48,7 @@ export const Contacts = () => {
     }
     return value === nationality;
   };
-  const clearFilters = () => {
-    setFilters(filtersDefaultValue);
-  };
+
   const filteredContacts = contacts.data
     .filter((c) => filterByFullname(c.name, filters.fullname))
     .filter((c) => filterByGender(c.gender, filters.gender))
