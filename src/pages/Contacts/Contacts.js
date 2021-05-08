@@ -9,6 +9,7 @@ import { useViewMode } from "./useViewMode";
 import { VIEW_MODE } from "../../constants";
 
 import { ContactsFilters } from "./ContactsFilters";
+import { ToggleViewButtons } from "../../ToggleViewButtons";
 
 const filtersDefaultValue = {
   fullname: "",
@@ -61,8 +62,7 @@ export const Contacts = () => {
           Contacts
         </Typography>
         <div>
-          <button onClick={() => setViewMode(VIEW_MODE.GRID)}>Grid</button>
-          <button onClick={() => setViewMode(VIEW_MODE.TABLE)}>Table</button>
+          <ToggleViewButtons setViewMode={setViewMode} viewMode={viewMode} />
         </div>
       </Grid>
       <Grid item xs={12} className="filters">
@@ -74,13 +74,16 @@ export const Contacts = () => {
       </Grid>
       {(() => {
         if (contacts.isLoading) {
-          return <div>...Loading</div>;
+          return <div data-testid="contacts-loader">...Loading</div>;
+        }
+        if (contacts.isError) {
+          return <div data-testid="contacts-error">...error</div>;
         }
         if (viewMode === VIEW_MODE.TABLE) {
           return <ContactsTable data={filteredContacts} />;
         }
         if (viewMode === VIEW_MODE.GRID) {
-          return <div>Grid</div>;
+          return <div data-testid="contacts-grid-container">Grid</div>;
         }
         return null;
       })()}

@@ -2,24 +2,27 @@ import { useEffect, useState } from "react";
 
 export const useContacts = () => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const getContacts = async () => {
       try {
         setIsLoading(true);
         const response = await fetch("https://randomuser.me/api/?results=8");
-        const { results } = await response.json();
+        const { results, error } = await response.json();
+        if (error) {
+          throw new Error(error);
+        }
         setData(results);
-        setError(false);
+        setIsError(false);
       } catch (e) {
-        setError(true);
+        setIsError(true);
       } finally {
         setIsLoading(false);
       }
     };
     getContacts();
   }, []);
-  return { data, isLoading, error };
+  return { data, isLoading, isError };
 };

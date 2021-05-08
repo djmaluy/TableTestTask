@@ -15,7 +15,7 @@ import { NATIONALITY_HUMAN_NAME } from "../../constants/nationality";
 
 export const ContactsTable = ({ data }) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} data-testid="contacts-table-container">
       <Table aria-label="contacts table">
         <TableHead>
           <TableRow>
