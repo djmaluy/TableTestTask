@@ -2,8 +2,8 @@ import React, { useCallback } from "react";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import ViewModuleIcon from "@material-ui/icons/ViewModule";
 import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { VIEW_MODE } from "./constants";
+import { ToggleButtonGroup } from "@material-ui/lab";
 
 export const ToggleViewButtons = ({ viewMode, setViewMode }) => {
   const handleChange = useCallback(
